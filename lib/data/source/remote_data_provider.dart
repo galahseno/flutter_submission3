@@ -4,7 +4,7 @@ import 'package:submission_1/data/model/remote/detail/customer_reviews.dart';
 import 'package:submission_1/data/model/remote/detail/detail_restaurant_response.dart';
 
 class RemoteDataProvider {
-  final _apiService = ApiService();
+  final ApiService _apiService = ApiService();
 
   Future<RestaurantResponse> getRestaurants() async {
     return _apiService.getRestaurants();

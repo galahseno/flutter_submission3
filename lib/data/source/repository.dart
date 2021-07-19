@@ -8,17 +8,16 @@ import 'package:submission_1/data/source/remote_data_provider.dart';
 import 'package:submission_1/utils/notification_helper.dart';
 
 class Repository {
-  static final Repository _repository = Repository._internal();
 
-  factory Repository() {
-    return _repository;
-  }
+  Repository(
+    this._remoteDataProvider,
+    this._localDataProvider,
+    this._notificationHelper,
+  );
 
-  Repository._internal();
-
-  final _remoteDataProvider = RemoteDataProvider();
-  final _localDataProvider = LocalDataProvider();
-  final _notificationHelper = NotificationHelper();
+  final RemoteDataProvider _remoteDataProvider;
+  final LocalDataProvider _localDataProvider;
+  final NotificationHelper _notificationHelper;
 
   Future<RestaurantResponse> getRestaurants() async {
     return await _remoteDataProvider.getRestaurants();
@@ -28,7 +27,7 @@ class Repository {
     return await _remoteDataProvider.searchRestaurants(query);
   }
 
-  Future<DetailResponse> getDetailRestaurants(String id) async {
+  Future<DetailResponse> getDetailRestaurant(String id) async {
     return await _remoteDataProvider.getDetailRestaurant(id);
   }
 

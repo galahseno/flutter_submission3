@@ -11,6 +11,8 @@ import 'package:submission_1/bloc/search/search_bloc.dart';
 import 'package:submission_1/bloc/setting/setting_bloc.dart';
 import 'package:submission_1/common/navigation.dart';
 import 'package:submission_1/common/styles.dart';
+import 'package:submission_1/data/source/local_data_provider.dart';
+import 'package:submission_1/data/source/remote_data_provider.dart';
 import 'package:submission_1/data/source/repository.dart';
 import 'package:submission_1/ui/detail_page.dart';
 import 'package:submission_1/ui/favorite_page.dart';
@@ -45,27 +47,27 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<ListRestaurantBloc>(
           create: (_) => ListRestaurantBloc(
-            Repository(),
+            Repository(RemoteDataProvider(), LocalDataProvider(), NotificationHelper()),
           ),
         ),
         BlocProvider<SearchBloc>(
           create: (_) => SearchBloc(
-            Repository(),
+            Repository(RemoteDataProvider(), LocalDataProvider(), NotificationHelper()),
           ),
         ),
         BlocProvider<DetailBloc>(
           create: (_) => DetailBloc(
-            Repository(),
+            Repository(RemoteDataProvider(), LocalDataProvider(), NotificationHelper()),
           ),
         ),
         BlocProvider<FavoriteBloc>(
           create: (_) => FavoriteBloc(
-            Repository(),
+            Repository(RemoteDataProvider(), LocalDataProvider(), NotificationHelper()),
           ),
         ),
         BlocProvider<SettingBloc>(
           create: (_) => SettingBloc(
-            Repository(),
+            Repository(RemoteDataProvider(), LocalDataProvider(), NotificationHelper()),
           ),
         ),
       ],

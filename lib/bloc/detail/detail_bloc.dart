@@ -20,7 +20,7 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
     if (event is LoadedDetailEvent) {
       try {
         final detailRestaurant =
-            await _repository.getDetailRestaurants(event.id);
+            await _repository.getDetailRestaurant(event.id);
         final statusFavorite = await _repository.getFavoriteById(event.id);
         yield DetailLoaded(
             detailResponse: detailRestaurant,
@@ -38,7 +38,7 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
       try {
         await _repository.postReview(event.id, event.name, event.review);
         final detailRestaurant =
-            await _repository.getDetailRestaurants(event.id);
+            await _repository.getDetailRestaurant(event.id);
         final statusFavorite = await _repository.getFavoriteById(event.id);
         yield DetailLoaded(
             detailResponse: detailRestaurant,

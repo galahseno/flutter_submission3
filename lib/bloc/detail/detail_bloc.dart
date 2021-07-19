@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:submission_1/data/model/remote/detail/detail_restaurant_response.dart';
-import 'package:submission_1/data/model/remote/detail/restaurant.dart';
 import 'package:submission_1/data/source/repository.dart';
 
 part 'detail_event.dart';

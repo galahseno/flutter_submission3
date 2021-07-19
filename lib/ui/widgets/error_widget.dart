@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:submission_1/common/styles.dart';
 
-Widget buildErrorWidget(String message) {
+Widget buildErrorWidget(String message, IconData icon) {
   return Container(
     child: Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
-            Icons.error,
+            icon,
             size: 75,
             color: secondaryColor,
           ),

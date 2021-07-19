@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:submission_1/bloc/favorite/favorite_bloc.dart';
 import 'package:submission_1/bloc/restaurant/list_restaurant_bloc.dart';
+import 'package:submission_1/bloc/setting/setting_bloc.dart';
 import 'package:submission_1/common/styles.dart';
 import 'package:submission_1/ui/favorite_page.dart';
 import 'package:submission_1/ui/search_page.dart';
 import 'package:submission_1/ui/setting_page.dart';
 import 'package:submission_1/ui/widgets/card_restaurants.dart';
 import 'package:submission_1/ui/widgets/error_widget.dart';
+import 'package:submission_1/utils/notification_helper.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home_page';
@@ -73,6 +75,7 @@ class _HomePageState extends State<HomePage> {
               iconSize: 30,
               onPressed: () {
                 Navigator.pushNamed(context, SettingPage.routeName);
+                context.read<SettingBloc>().add(GetDailyReminder());
               },
             ),
           ],
@@ -96,7 +99,8 @@ class _HomePageState extends State<HomePage> {
             } else if (state is ListRestaurantLoaded) {
               return _listViewBuild(state);
             } else {
-              return buildErrorWidget((state as ListRestaurantError).message);
+              return buildErrorWidget(
+                  (state as ListRestaurantError).message, Icons.error);
             }
           },
         ),
@@ -138,6 +142,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void dispose() {
     super.dispose();
+    selectNotificationSubject.close();
     _controller.dispose();
   }
 }

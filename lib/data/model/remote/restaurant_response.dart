@@ -13,4 +13,8 @@ class RestaurantResponse {
       });
     }
   }
+
+  Map<String, dynamic> toJson() => {
+    "restaurants": List<dynamic>.from(restaurants.map((x) => x.toJson())),
+  };
 }

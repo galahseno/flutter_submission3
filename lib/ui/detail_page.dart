@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:submission_1/bloc/detail/detail_bloc.dart';
 import 'package:submission_1/bloc/favorite/favorite_bloc.dart';
+import 'package:submission_1/common/navigation.dart';
 import 'package:submission_1/common/styles.dart';
 import 'package:submission_1/data/api/api_service.dart';
 import 'package:submission_1/ui/bottom_sheet.dart';
@@ -64,7 +65,8 @@ class _DetailPageState extends State<DetailPage> {
             } else if (state is DetailLoaded) {
               return _buildDetailContent(state);
             } else {
-              return buildErrorWidget((state as DetailError).message);
+              return buildErrorWidget(
+                  (state as DetailError).message, Icons.error);
             }
           },
         ),
@@ -95,8 +97,10 @@ class _DetailPageState extends State<DetailPage> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.pop(context);
-                          context.read<FavoriteBloc>().add(FavoritePageLoadedEvent());
+                          Navigation.back();
+                          context
+                              .read<FavoriteBloc>()
+                              .add(FavoritePageLoadedEvent());
                         },
                         child: IconBox(
                           width: 45,

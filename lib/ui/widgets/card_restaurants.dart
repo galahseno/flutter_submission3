@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:submission_1/bloc/detail/detail_bloc.dart';
+import 'package:submission_1/common/navigation.dart';
 import 'package:submission_1/data/api/api_service.dart';
 import 'package:submission_1/ui/detail_page.dart';
 
 Widget buildRestaurantsItem(BuildContext context, dynamic restaurants) {
   return GestureDetector(
     onTap: () {
-      Navigator.pushNamed(context, DetailPage.routeName,
-          arguments: restaurants.id);
+      Navigation.intentWithData(DetailPage.routeName, restaurants.id);
       context.read<DetailBloc>().add(DetailInitialEvent());
     },
     child: Container(

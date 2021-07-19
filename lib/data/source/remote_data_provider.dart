@@ -1,5 +1,5 @@
 import 'package:submission_1/data/api/api_service.dart';
-import 'package:submission_1/data/model/Remote/restaurant_response.dart';
+import 'package:submission_1/data/model/remote/restaurant_response.dart';
 import 'package:submission_1/data/model/remote/detail/customer_reviews.dart';
 import 'package:submission_1/data/model/remote/detail/detail_restaurant_response.dart';
 

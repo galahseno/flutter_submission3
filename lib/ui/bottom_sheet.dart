@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:submission_1/bloc/detail/detail_bloc.dart';
+import 'package:submission_1/common/navigation.dart';
 import 'package:submission_1/common/styles.dart';
 import 'package:submission_1/ui/widgets/error_widget.dart';
 import 'package:submission_1/ui/widgets/icon_box.dart';
@@ -19,7 +20,7 @@ showBottomSheetReviews(
         return _buildCostumerReviews(
             state, context, nameController, reviewController);
       } else {
-        return buildErrorWidget((state as DetailError).message);
+        return buildErrorWidget((state as DetailError).message, Icons.error);
       }
     },
   );
@@ -137,7 +138,7 @@ List<Widget> _checkReviewsLength(
                       foregroundColor:
                           MaterialStateProperty.all(Colors.green[800]),
                     ),
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: () => Navigation.back(),
                     child: Text('Cancel'),
                   ),
                   TextButton(
@@ -147,7 +148,7 @@ List<Widget> _checkReviewsLength(
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        Navigator.pop(context);
+                        Navigation.back();
                         context.read<DetailBloc>().add(
                               PostDetailReviewEvent(
                                 id: state.detailResponse.restaurant.id,

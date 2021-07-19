@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:submission_1/bloc/favorite/favorite_bloc.dart';
+import 'package:submission_1/bloc/setting/setting_bloc.dart';
+import 'package:submission_1/common/navigation.dart';
 import 'package:submission_1/common/styles.dart';
 import 'package:submission_1/ui/setting_page.dart';
 import 'package:submission_1/ui/widgets/card_restaurants.dart';
@@ -37,7 +39,7 @@ class _FavoritePageState extends State<FavoritePage> {
           toolbarHeight: 75,
           leading: GestureDetector(
             onTap: () {
-              Navigator.pop(context);
+              Navigation.back();
             },
             child: Icon(
               Icons.arrow_back,
@@ -52,6 +54,7 @@ class _FavoritePageState extends State<FavoritePage> {
               iconSize: 30,
               onPressed: () {
                 Navigator.pushNamed(context, SettingPage.routeName);
+                context.read<SettingBloc>().add(GetDailyReminder());
               },
             ),
           ],
@@ -69,9 +72,9 @@ class _FavoritePageState extends State<FavoritePage> {
             } else if (state is FavoritePageLoaded) {
               return _listViewBuild(state);
             } else if (state is FavoriteNoData) {
-              return buildErrorWidget(state.message);
-            } else if (state is FavoritePageError){
-              return buildErrorWidget((state).message);
+              return buildErrorWidget(state.message, Icons.no_meals);
+            } else if (state is FavoritePageError) {
+              return buildErrorWidget((state).message, Icons.error);
             } else {
               return Center(
                 child: CircularProgressIndicator(),

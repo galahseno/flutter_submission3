@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:submission_1/bloc/search/search_bloc.dart';
+import 'package:submission_1/bloc/setting/setting_bloc.dart';
+import 'package:submission_1/common/navigation.dart';
 import 'package:submission_1/common/styles.dart';
 import 'package:submission_1/ui/setting_page.dart';
 import 'package:submission_1/ui/widgets/card_restaurants.dart';
@@ -52,7 +54,7 @@ class _SearchPageState extends State<SearchPage> {
           toolbarHeight: 75,
           leading: GestureDetector(
             onTap: () {
-              Navigator.pop(context);
+              Navigation.back();
             },
             child: Icon(
               Icons.arrow_back,
@@ -99,6 +101,7 @@ class _SearchPageState extends State<SearchPage> {
               iconSize: 30,
               onPressed: () {
                 Navigator.pushNamed(context, SettingPage.routeName);
+                context.read<SettingBloc>().add(GetDailyReminder());
               },
             ),
           ],
@@ -141,9 +144,9 @@ class _SearchPageState extends State<SearchPage> {
             } else if (state is ListRestaurantSearch) {
               return _listViewBuild(state);
             } else if (state is SearchRestaurantError) {
-              return buildErrorWidget(state.message);
+              return buildErrorWidget(state.message, Icons.error);
             } else if (state is ListRestaurantSearchNotFound) {
-              return buildErrorWidget(state.message);
+              return buildErrorWidget(state.message, Icons.no_meals);
             } else {
               return Container();
             }

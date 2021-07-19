@@ -42,7 +42,6 @@ class DatabaseHelper {
     final db = await database;
     await db.insert(_tblFavorite, restaurant.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);
-    print('Data saved');
   }
 
   Future<List<FavoriteRestaurants>> getFavorites() async {
@@ -76,7 +75,5 @@ class DatabaseHelper {
       where: 'id = ?',
       whereArgs: [id],
     );
-
-    print('Data deleted');
   }
 }

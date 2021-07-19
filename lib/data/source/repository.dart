@@ -1,10 +1,11 @@
-import 'package:submission_1/data/model/Remote/restaurant_response.dart';
+import 'package:submission_1/data/model/remote/restaurant_response.dart';
 import 'package:submission_1/data/model/local/favorite_restaurants.dart';
 import 'package:submission_1/data/model/remote/detail/customer_reviews.dart';
 import 'package:submission_1/data/model/remote/detail/detail_restaurant_response.dart';
 import 'package:submission_1/data/model/remote/detail/restaurant.dart';
 import 'package:submission_1/data/source/local_data_provider.dart';
 import 'package:submission_1/data/source/remote_data_provider.dart';
+import 'package:submission_1/utils/notification_helper.dart';
 
 class Repository {
   static final Repository _repository = Repository._internal();
@@ -17,6 +18,7 @@ class Repository {
 
   final _remoteDataProvider = RemoteDataProvider();
   final _localDataProvider = LocalDataProvider();
+  final _notificationHelper = NotificationHelper();
 
   Future<RestaurantResponse> getRestaurants() async {
     return await _remoteDataProvider.getRestaurants();
@@ -55,5 +57,18 @@ class Repository {
 
   Future<void> removeFavorite(String id) async {
     await _localDataProvider.removeFavorite(id);
+  }
+
+  Future<bool> get isDailyReminder async {
+    return _localDataProvider.isDailyReminder;
+  }
+
+  void setDailyReminder(bool value) async {
+    _localDataProvider.setDailyReminder(value);
+  }
+
+  void configureSelectNotificationSubject(String route, int index) {
+    _localDataProvider.setIndexNotification(index);
+    _notificationHelper.configureSelectNotificationSubject(route, index);
   }
 }

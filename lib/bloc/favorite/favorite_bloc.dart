@@ -23,7 +23,6 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
         await _repository.insertFavorite(event.restaurant);
         yield FavoriteLoaded(statusFavorite: true);
       } catch (e) {
-        print(e);
         yield FavoriteError(message: 'Something wrong, please try again later');
       }
     }
@@ -32,7 +31,6 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
         await _repository.removeFavorite(event.id);
         yield FavoriteLoaded(statusFavorite: false);
       } catch (e) {
-        print(e);
         yield FavoriteError(message: 'Something wrong, please try again later');
       }
     }
@@ -50,7 +48,6 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
           yield FavoritePageLoaded(restaurants: listFavorite);
         }
       } catch (e) {
-        print(e);
         yield FavoritePageError(
             message: 'Something wrong, please try again later');
       }

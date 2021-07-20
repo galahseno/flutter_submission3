@@ -58,12 +58,21 @@ List<Widget> _checkReviewsLength(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(value.name ?? '-'),
-              Text(value.date ?? '-'),
-              Text(
-                value.review ?? '-',
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+              Flexible(
+                flex: 1,
+                child: Text(value.name ?? '-'),
+              ),
+              Flexible(
+                flex: 1,
+                child: Text(value.date ?? '-'),
+              ),
+              Flexible(
+                flex: 2,
+                child: Text(
+                  value.review ?? '-',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),
@@ -89,44 +98,50 @@ List<Widget> _checkReviewsLength(
                     key: _formKey,
                     child: Column(
                       children: [
-                        TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter some text';
-                            } else if (value.length < 5) {
-                              return 'Name must be at least 5 character';
-                            }
-                            return null;
-                          },
-                          controller: nameController,
-                          cursorColor: secondaryColor,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              prefixIcon: Icon(
-                                Icons.account_box_outlined,
-                                color: secondaryColor,
-                              ),
-                              hintText: 'Input your name here . . '),
+                        Flexible(
+                          flex: 1,
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter some text';
+                              } else if (value.length < 5) {
+                                return 'Name must be at least 5 character';
+                              }
+                              return null;
+                            },
+                            controller: nameController,
+                            cursorColor: secondaryColor,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                prefixIcon: Icon(
+                                  Icons.account_box_outlined,
+                                  color: secondaryColor,
+                                ),
+                                hintText: 'Input your name here . . '),
+                          ),
                         ),
-                        TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter some text';
-                            } else if (value.length < 10) {
-                              return 'Review must be at least 10 character';
-                            }
-                            return null;
-                          },
-                          controller: reviewController,
-                          maxLines: 3,
-                          cursorColor: secondaryColor,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              prefixIcon: Icon(
-                                Icons.rate_review,
-                                color: secondaryColor,
-                              ),
-                              hintText: 'Input your review here . .'),
+                        Flexible(
+                          flex: 1,
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter some text';
+                              } else if (value.length < 10) {
+                                return 'Review must be at least 10 character';
+                              }
+                              return null;
+                            },
+                            controller: reviewController,
+                            maxLines: 3,
+                            cursorColor: secondaryColor,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                prefixIcon: Icon(
+                                  Icons.rate_review,
+                                  color: secondaryColor,
+                                ),
+                                hintText: 'Input your review here . .'),
+                          ),
                         ),
                       ],
                     ),

@@ -26,46 +26,52 @@ Widget buildRestaurantsItem(BuildContext context, dynamic restaurants) {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Hero(
-              tag: restaurants.id,
-              child: CircleAvatar(
-                radius: 100,
-                backgroundImage: NetworkImage(
-                  ApiService.baseImgUrl + restaurants.pictureId,
+            Flexible(
+              flex: 1,
+              child: Hero(
+                tag: restaurants.id,
+                child: CircleAvatar(
+                  radius: 100,
+                  backgroundImage: NetworkImage(
+                    ApiService.baseImgUrl + restaurants.pictureId,
+                  ),
                 ),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  restaurants.name,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(right: 10),
-                      child: Icon(
-                        Icons.star,
-                        color: Colors.green[300],
-                      ),
-                    ),
-                    Text(
-                      restaurants.rating,
-                      style: TextStyle(
-                          fontSize: 15,
+            Flexible(
+              flex: 1,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    restaurants.name,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: 10),
+                        child: Icon(
+                          Icons.star,
                           color: Colors.green[300],
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                Text(
-                  restaurants.city,
-                  style: TextStyle(fontSize: 18, color: Colors.grey),
-                ),
-              ],
+                        ),
+                      ),
+                      Text(
+                        restaurants.rating,
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.green[300],
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    restaurants.city,
+                    style: TextStyle(fontSize: 18, color: Colors.grey),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

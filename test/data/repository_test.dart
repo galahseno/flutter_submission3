@@ -34,7 +34,6 @@ void main() {
 
       expect(result.restaurants.length, 20);
     });
-
     test('Search Restaurant', () async {
       when(remoteDataProvider.searchRestaurants(query)).thenAnswer(
         (_) => Future.value(
@@ -47,7 +46,6 @@ void main() {
 
       expect(result.restaurants.length, 4);
     });
-
     test('Get Detail Restaurant', () async {
       when(remoteDataProvider.getDetailRestaurant(id)).thenAnswer(
             (_) => Future.value(
@@ -62,7 +60,6 @@ void main() {
       expect(result.restaurant.city, 'Medan');
       expect(result.restaurant.address, 'Jln. Pandeglang no 19');
     });
-
     test('Get Favorite Restaurant', () async {
       when(localDataProvider.getFavorites()).thenAnswer(
             (_) => Future.value(

@@ -41,33 +41,35 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final repository = Repository(RemoteDataProvider(), LocalDataProvider(), NotificationHelper());
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<ListRestaurantBloc>(
           create: (_) => ListRestaurantBloc(
-            Repository(RemoteDataProvider(), LocalDataProvider(), NotificationHelper()),
+            repository,
           ),
         ),
         BlocProvider<SearchBloc>(
           create: (_) => SearchBloc(
-            Repository(RemoteDataProvider(), LocalDataProvider(), NotificationHelper()),
+            repository,
           ),
         ),
         BlocProvider<DetailBloc>(
           create: (_) => DetailBloc(
-            Repository(RemoteDataProvider(), LocalDataProvider(), NotificationHelper()),
+            repository,
           ),
         ),
         BlocProvider<FavoriteBloc>(
           create: (_) => FavoriteBloc(
-            Repository(RemoteDataProvider(), LocalDataProvider(), NotificationHelper()),
+            repository,
           ),
         ),
         BlocProvider<SettingBloc>(
           create: (_) => SettingBloc(
-            Repository(RemoteDataProvider(), LocalDataProvider(), NotificationHelper()),
+            repository,
           ),
         ),
       ],

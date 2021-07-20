@@ -1,10 +1,12 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:submission_1/bloc/restaurant/list_restaurant_bloc.dart';
+import 'package:submission_1/data/model/remote/restaurant_response.dart';
 import 'package:submission_1/data/source/repository.dart';
 
-import '../mock_repository.dart';
+import 'list_restaurant_bloc_test.mocks.dart';
 
 @GenerateMocks([Repository])
 void main() {
@@ -17,11 +19,24 @@ void main() {
       expect: () => [],
     );
     blocTest(
-      'Loaded List Restaurant',
+      'Loaded Error Restaurant',
       build: () => ListRestaurantBloc(repository),
-      act: (bloc) => (bloc as ListRestaurantBloc).add(LoadedEvent()),
-      expect: () =>
-      [isA<ListRestaurantLoaded>()],
+      act: (ListRestaurantBloc bloc) {
+        bloc.add(LoadedEvent());
+      },
+      expect: () => [isA<ListRestaurantError>()],
     );
+    blocTest('Loaded List Restaurant',
+        build: () => ListRestaurantBloc(repository),
+        act: (ListRestaurantBloc bloc) {
+          when(repository.getRestaurants()).thenAnswer(
+              (_) async => Future.value(RestaurantResponse(restaurants: [])));
+
+          bloc.add(LoadedEvent());
+        },
+        expect: () => [isA<ListRestaurantLoaded>()],
+        verify: (_) {
+          verify(repository.getRestaurants());
+        });
   });
 }

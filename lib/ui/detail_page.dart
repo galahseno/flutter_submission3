@@ -154,20 +154,12 @@ class _DetailPageState extends State<DetailPage> {
                             );
                           } else {
                             return GestureDetector(
-                              onTap: () {
-                                final snackBar = SnackBar(
-                                  content: Text(
-                                      (stateFavorite as FavoriteError).message),
-                                  backgroundColor: Colors.green[300],
-                                );
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(snackBar);
-                              },
+                              onTap: () {},
                               child: IconBox(
                                 width: 45,
                                 height: 45,
                                 child: Icon(
-                                  Icons.error,
+                                  Icons.favorite_border,
                                   color: secondaryColor,
                                 ),
                               ),
